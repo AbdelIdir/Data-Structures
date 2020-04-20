@@ -65,7 +65,7 @@ class DoublyLinkedList:
             new_node.next = self.head
             self.head.prev = new_node
             self.head = new_node
-            self.length+=1
+            self.length += 1
 
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
@@ -74,6 +74,7 @@ class DoublyLinkedList:
     def remove_from_head(self):
         value = self.head.value
         self.delete(self.head)
+        self.length -= 1
         return value
 
     """Wraps the given value in a ListNode and inserts it 
