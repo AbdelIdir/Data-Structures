@@ -12,14 +12,6 @@ class Stack:
     def push(self, value):
         self.size += 1
         self.storage.add_to_head(value)
-        # self.size += 1
-        # if not self.storage.head:
-        #     self.storage.head = newNode
-        #     self.storage.tail = newNode
-        # else:
-        #     temp = self.storage.head
-        #     self.storage.head= newNode
-        #     self.storage.next = temp
 
     def pop(self):
         if self.size == 0:
