@@ -23,7 +23,10 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        pass
+        if key not in self.storage:
+            return - 1
+            
+        value = self.storage[key]
 
     """
     Adds the given key-value pair to the cache. The newly-
