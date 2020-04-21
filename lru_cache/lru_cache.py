@@ -31,7 +31,7 @@ class LRUCache:
         node = self.storage[key]
 
         self.dll.move_to_front(node)
-
+        return node
     """
     Adds the given key-value pair to the cache. The newly-
     added pair should be considered the most-recently used
