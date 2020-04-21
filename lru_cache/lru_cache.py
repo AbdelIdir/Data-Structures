@@ -9,11 +9,12 @@ class LRUCache:
     order, as well as a storage dict that provides fast access
     to every node stored in the cache.
     """
+
     def __init__(self, limit=10):
         self.limit = limit
         self.size = 0
-        self.ddl = DoublyLinkedList()
-        self.storage={}
+        self.dll = DoublyLinkedList()
+        self.storage = {}
 
     """
     Retrieves the value associated with the given key. Also
@@ -22,11 +23,14 @@ class LRUCache:
     Returns the value associated with the key or None if the
     key-value pair doesn't exist in the cache.
     """
+
     def get(self, key):
         if key not in self.storage:
             return - 1
-            
-        value = self.storage[key]
+
+        node = self.storage[key]
+
+        self.dll.move_to_front(node)
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -38,5 +42,6 @@ class LRUCache:
     want to overwrite the old value associated with the key with
     the newly-specified value.
     """
+
     def set(self, key, value):
         pass
