@@ -14,7 +14,7 @@ class LRUCache:
         self.limit = limit
         self.size = 0
         self.dll = DoublyLinkedList()
-        self.storage = {}
+        self.storage_cache = {}
 
     """
     Retrieves the value associated with the given key. Also
@@ -25,13 +25,13 @@ class LRUCache:
     """
 
     def get(self, key):
-        if key not in self.storage:
-            return - 1
+        if key not in self.storage_cache:
+            return None
 
-        node = self.storage[key]
+        node = self.storage_cache[key]
 
         self.dll.move_to_front(node)
-        return node
+        return self.dll.head.value[1]
     """
     Adds the given key-value pair to the cache. The newly-
     added pair should be considered the most-recently used
@@ -44,4 +44,12 @@ class LRUCache:
     """
 
     def set(self, key, value):
+        #     #Additionally, in the
+        # case that the key already exists in the cache, we simply
+        # want to overwrite the old value associated with the key with
+        # the newly - specified value.
+        if key in self.storage_cache:
+            self.dll.move_to_front(self.storage_cache[key])
+        else:
+            self.dll.head.value=(key,value)
         pass
