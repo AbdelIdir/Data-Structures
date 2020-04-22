@@ -13,8 +13,8 @@ class LRUCache:
     def __init__(self, limit=10):
         self.limit = limit
         self.size = 0
-        self.dll = DoublyLinkedList()
-        self.storage_cache = {}
+        self.order = DoublyLinkedList()
+        self.storage = dict()
 
     """
     Retrieves the value associated with the given key. Also
@@ -25,13 +25,20 @@ class LRUCache:
     """
 
     def get(self, key):
-        if key not in self.storage_cache:
+        # if the key exists in the storage
+        if key in self.storage:
+            # extrapolate the node from the storage at the key of key
+            # extrapolate the tuple / pair from the sturage
+            node = self.storage[key]
+            # move the node to the end of the order list
+            self.order.move_to_end(node)
+            # return the value from the node
+            return node.value[1]
+        # otherwise
+        else:
+            # return None
             return None
 
-        node = self.storage_cache[key]
-
-        self.dll.move_to_front(node)
-        return self.dll.head.value[1]
     """
     Adds the given key-value pair to the cache. The newly-
     added pair should be considered the most-recently used
@@ -44,12 +51,32 @@ class LRUCache:
     """
 
     def set(self, key, value):
-        #     #Additionally, in the
-        # case that the key already exists in the cache, we simply
-        # want to overwrite the old value associated with the key with
-        # the newly - specified value.
-        if key in self.storage_cache:
-            self.dll.move_to_front(self.storage_cache[key])
-        else:
-            self.dll.head.value=(key,value)
-        pass
+        # if the key exists in the storage
+        # if the key exists in the storage
+        if key in self.storage:
+            # extrapolate the node from the storage at the index of key
+            node = self.storage[key]
+            # set the nodes value to the (key, value) pair
+            node.value = (key, value)  # node = ("bob", val) <= ("bob", 45)
+            # move the node to the end of the order list
+            self.order.move_to_end(node)
+            # just return from the method
+            return
+        # if the size is equal to the limit
+        if self.size == self.limit:
+            # delete the storage entry at the key from the order lists head
+            # head = self.order.head
+            # val = head.value
+            # k = val[0]
+            del self.storage[self.order.head.value[0]]
+            # remove the head of the order
+            self.order.remove_from_head()
+            # decrement the size
+            self.size -= 1
+
+        # add the (key, value) pair to the tail of the order
+        self.order.add_to_tail((key, value))
+        # set the storage at the key to the order tail
+        self.storage[key] = self.order.tail
+        # increment the size
+        self.size += 1
