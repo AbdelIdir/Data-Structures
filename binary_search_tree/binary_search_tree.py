@@ -1,6 +1,12 @@
+import sys
+sys.path.append('../queue_and_stack')
 from dll_queue import Queue
 from dll_stack import Stack
 
+# class BTS_Node:
+#     def __init__(self, value):
+#       self.name = name
+#       self.age = age
 
 class BinarySearchTree:
     def __init__(self, value):
@@ -11,6 +17,10 @@ class BinarySearchTree:
     # Insert the given value into the tree
     def insert(self, value):
         # check if new nodes value is less than out current nodes value
+        newNode = BinarySearchTree(value)
+        if self.value == None:
+            self.value == newNode
+            return self
             # if there is no left child already here
                 # place a new bst with the value passed in to the left
             # otherwise
