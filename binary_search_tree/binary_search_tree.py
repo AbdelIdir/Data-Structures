@@ -8,6 +8,7 @@ from dll_stack import Stack
 #       self.name = name
 #       self.age = age
 
+
 class BinarySearchTree:
     def __init__(self, value):
         self.value = value
@@ -15,26 +16,34 @@ class BinarySearchTree:
         self.right = None
 
     # Insert the given value into the tree
+    # Insert the given value into the tree
     def insert(self, value):
-        # check if new nodes value is less than out current nodes value
-        newNode = BinarySearchTree(value)
-        if self.value == None:
-            self.value == newNode
-            return self
-            # if there is no left child already here
-                # place a new bst with the value passed in to the left
-            # otherwise
-                # repeat the process recursively on the left
-
-        # else if the value is greater than or equal to the current nodes value
-            # if there is no right child already here
-                # place a new bst with the value passed in to the right
-            # otherwise
-                # repeat the process recursively on the right
-
-        # Return True if the tree contains the value
-        # False if it does not
-        pass
+        # Create a new node
+        new_node = BinarySearchTree(value)
+        # Starting at the root,
+        # Check if there is a root, if not, the root becomes the new node
+        if self.value is None:
+            self.value = new_node.value
+            return self.value
+        # If there is a root, check if the value of the new node is greater than or less than the value of the root
+        # If it is greater,
+        if value >= self.value:
+            # -> Check to see if there is a node to the right
+            if self.right is not None:
+                # -> If there is, then move to that node and repeat these steps
+                self.right.insert(value)
+        # If there is not, add that node as the right property
+            else:
+                self.right = new_node
+        # If it is less,
+        else:
+            # check to see if there is a node to the left
+            # -> If there is then move to that node and repeat these steps
+            if self.left is not None:
+                self.left.insert(value)
+        # If there is not, add that node as the left property
+            else:
+                self.left = new_node(edited)
 
     def contains(self, target):
         # base case. if value matches current target
