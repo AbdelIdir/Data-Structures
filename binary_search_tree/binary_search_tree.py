@@ -48,19 +48,33 @@ class BinarySearchTree:
     def contains(self, target):
         # base case. if value matches current target
             # return True
+        if self.value == target:
+            return True
+
+        if target < self.value:
+            if self.left is None:
+                return False
+            else:
+                return self.left.contains(target)
+        else:
+            if self.right is None:
+                return False
+            else:
+                self.right.contains(target)
 
         # if target less than value
             # check left child recursively
             # if no left child
-                # return false
+              # return false
             # otherwise
-                # call contains on the left
+              # call contains on the left
         # otherwise
             # check right child recursively
             # if no right child
-                # return false
+              # return false
             # otherwise
-                # call contains on the right
+              # call contains on the right
+
         pass
 
     # Return the maximum value found in the tree
