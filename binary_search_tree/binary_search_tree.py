@@ -43,7 +43,7 @@ class BinarySearchTree:
                 self.left.insert(value)
         # If there is not, add that node as the left property
             else:
-                self.left = new_node(edited)
+                self.left = new_node
 
     def contains(self, target):
         # base case. if value matches current target
